@@ -1,4 +1,4 @@
-package utils
+package team.redrock.makiko.utils
 
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.withLock

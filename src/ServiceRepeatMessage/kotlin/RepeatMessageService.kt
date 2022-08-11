@@ -1,12 +1,9 @@
-package service.impl
-
 import com.ndhzs.hotfix.handler.suffix.jar.JarEntrance
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.mamoe.mirai.console.command.CommandSender
-import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.contact.Member
 import net.mamoe.mirai.event.GlobalEventChannel
@@ -14,7 +11,7 @@ import net.mamoe.mirai.event.Listener
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.code.MiraiCode.deserializeMiraiCode
 import net.mamoe.mirai.message.data.*
-import team.redrock.makiko.service.Service
+import team.redrock.makiko.Makiko
 import team.redrock.makiko.utils.*
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -45,8 +42,7 @@ class RepeatMessageService : JarEntrance {
                 handleRepeatMessage()
                 handleRepeatImage()
             }
-        mJob = coroutineScope {
-            launch {
+        mJob = Makiko.launch {
                 while (true) {
                     // 5分钟清除一次标记
                     delay(TimeUnit.MINUTES.toMillis(5))
@@ -55,7 +51,6 @@ class RepeatMessageService : JarEntrance {
                     }
                 }
             }
-        }
     }
     
     override suspend fun CommandSender.onFixUnload(): Boolean {

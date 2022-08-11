@@ -12,7 +12,7 @@ import java.io.File
  * @author 寒雨
  * @since 2022/8/9 14:55
  */
-object WeightInterceptor : interceptors.AtMessageContainsInterceptor("体重", withPic = "[mirai:image:{AFFAE4A0-C12E-DE38-EF5B-D3303C84B8D4}.gif]") {
+class WeightInterceptor : AtMessageContainsInterceptor("体重", withPic = "[mirai:image:{AFFAE4A0-C12E-DE38-EF5B-D3303C84B8D4}.gif]") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """

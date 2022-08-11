@@ -13,7 +13,7 @@ import net.mamoe.mirai.message.data.buildMessageChain
  * @author 寒雨
  * @since 2022/8/10 14:22
  */
-object UnknownMessageInterceptor : AtMessageEventInterceptor {
+class UnknownMessageInterceptor : AtMessageEventInterceptor {
     override suspend fun intercept(event: GroupMessageEvent, at: List<At>, atBot: Boolean): Boolean {
         if (atBot) {
             event.group.sendMessage(buildMessageChain {

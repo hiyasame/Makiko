@@ -12,8 +12,8 @@ import java.io.File
  * @author 寒雨
  * @since 2022/8/9 14:34
  */
-object AgeInterceptor : interceptors.AtMessageContainsInterceptor(
-    "年龄", "年纪", "芳龄",
+class AgeInterceptor : AtMessageContainsInterceptor(
+    "年龄", "年纪", "芳龄", "你多大", "你几岁",
     withPic = " [mirai:image:{946779CA-A297-0475-5876-A5E78A692B52}.mirai]"
 ) {
 

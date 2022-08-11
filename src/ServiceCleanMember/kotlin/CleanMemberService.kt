@@ -1,16 +1,13 @@
-package service.impl
-
 import com.ndhzs.hotfix.handler.suffix.jar.JarEntrance
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.mamoe.mirai.console.command.CommandSender
-import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.message.code.MiraiCode.deserializeMiraiCode
 import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.buildMessageChain
-import team.redrock.makiko.service.Service
+import team.redrock.makiko.Makiko
 import team.redrock.makiko.utils.doPermissionAction
 import team.redrock.makiko.utils.theBot
 import java.util.*
@@ -27,25 +24,24 @@ class CleanMemberService : JarEntrance {
 
     private var job: Job? = null
     private var executedFlag = false
+
     // 21-Android-寒雨
     // 21 Android 寒雨
     // Android-寒雨
     // Android 寒雨
     private val regex = "(\\d+(\\s|-))?\\S+(\\s|-)\\S+".toRegex()
-    
+
     override suspend fun CommandSender.onFixLoad() {
-        job = coroutineScope {
-            launch {
-                while (true) {
-                    // 一分钟检查一次
-                    delay(TimeUnit.MINUTES.toMillis(1))
-                    handleRemind()
-                    handleClean()
-                }
+        job = Makiko.launch {
+            while (true) {
+                // 一分钟检查一次
+                delay(TimeUnit.MINUTES.toMillis(1))
+                handleRemind()
+                handleClean()
             }
         }
     }
-    
+
     override suspend fun CommandSender.onFixUnload(): Boolean {
         job?.cancel()
         job = null
@@ -94,6 +90,9 @@ class CleanMemberService : JarEntrance {
      */
     private fun checkTime(day: Int? = null, hour: Int? = null): Boolean {
         val calendar = Calendar.getInstance()
-        return (day == null || day == calendar.get(Calendar.DAY_OF_WEEK)) && (hour == null || hour == calendar.get(Calendar.HOUR_OF_DAY))
+        return (day == null || day == calendar.get(Calendar.DAY_OF_WEEK)) && (hour == null || hour == calendar.get(
+            Calendar.HOUR_OF_DAY
+        ))
     }
+
 }

@@ -1,8 +1,5 @@
-package service.impl
-
 import com.ndhzs.hotfix.handler.suffix.jar.JarEntrance
 import net.mamoe.mirai.console.command.CommandSender
-import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.contact.NormalMember
 import net.mamoe.mirai.event.GlobalEventChannel
 import net.mamoe.mirai.event.Listener
@@ -11,7 +8,6 @@ import net.mamoe.mirai.message.code.MiraiCode.deserializeMiraiCode
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.MessageSource.Key.recall
 import net.mamoe.mirai.message.data.buildMessageChain
-import team.redrock.makiko.service.Service
 
 /**
  * team.redrock.makiko.service.impl.DirtyWordService

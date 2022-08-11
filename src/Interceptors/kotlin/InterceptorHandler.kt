@@ -1,15 +1,15 @@
-package team.redrock.makiko.interceptors
-
-import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
-import net.mamoe.mirai.contact.User
+import com.ndhzs.hotfix.handler.suffix.jar.JarEntrance
+import interceptors.AtMessageEventInterceptor
+import interceptors.MessageEventInterceptor
+import interceptors.common.*
+import interceptors.eggshell.AgeInterceptor
+import interceptors.eggshell.HeightInterceptor
+import interceptors.eggshell.WeightInterceptor
+import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.event.GlobalEventChannel
 import net.mamoe.mirai.event.Listener
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
-import team.redrock.makiko.interceptors.common.*
-import team.redrock.makiko.interceptors.eggshell.AgeInterceptor
-import team.redrock.makiko.interceptors.eggshell.HeightInterceptor
-import team.redrock.makiko.interceptors.eggshell.WeightInterceptor
 
 /**
  * team.redrock.makiko.interceptors.InterceptorHandler
@@ -27,6 +27,7 @@ class InterceptorHandler : JarEntrance {
     private var listener: Listener<GroupMessageEvent>? = null
 
     override suspend fun CommandSender.onFixLoad() {
+        println("test")
         listener = GlobalEventChannel.subscribeAlways {
             interceptMessage(it)
         }
@@ -48,13 +49,13 @@ class InterceptorHandler : JarEntrance {
         )
         // init eggshell
         registerAtMessageInterceptor(
-            AgeInterceptor,
-            HeightInterceptor,
-            WeightInterceptor,
+            AgeInterceptor(),
+            HeightInterceptor(),
+            WeightInterceptor(),
         )
 
         registerAtMessageInterceptor(
-            UnknownMessageInterceptor
+            UnknownMessageInterceptor()
         )
     }
 

@@ -1,21 +1,21 @@
-package team.redrock.makiko.interceptors.common
+package interceptors.common
 
+import interceptors.AtMessageEventInterceptor
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.buildMessageChain
-import team.redrock.makiko.interceptors.AtMessageEventInterceptor
 import team.redrock.makiko.utils.chain
 import team.redrock.makiko.utils.requestImage
 
 /**
- * team.redrock.makiko.interceptors.common.InformationSecurityInterceptor
+ * interceptors.common.InformationSecurityInterceptor
  * makiko
  *
  * @author 寒雨
  * @since 2022/8/10 17:10
  */
-object InformationSecurityInterceptor : AtMessageEventInterceptor {
+class InformationSecurityInterceptor() : AtMessageEventInterceptor {
 
     private val keys = listOf(
         "信安协会",

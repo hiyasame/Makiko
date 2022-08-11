@@ -12,7 +12,7 @@ import java.io.File
  * @author 寒雨
  * @since 2022/8/9 14:53
  */
-object HeightInterceptor : interceptors.AtMessageContainsInterceptor("身高", withPic = "[mirai:image:{5693464F-1FD9-A92F-E1C4-74003F76D383}.gif]") {
+class HeightInterceptor : AtMessageContainsInterceptor("身高", withPic = "[mirai:image:{5693464F-1FD9-A92F-E1C4-74003F76D383}.gif]") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """

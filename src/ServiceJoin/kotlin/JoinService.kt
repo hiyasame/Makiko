@@ -1,23 +1,12 @@
-package service.impl
-
 import com.ndhzs.hotfix.handler.suffix.jar.JarEntrance
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import net.mamoe.mirai.console.command.CommandSender
-import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.event.GlobalEventChannel
 import net.mamoe.mirai.event.Listener
-import net.mamoe.mirai.event.events.GroupEvent
 import net.mamoe.mirai.event.events.MemberJoinEvent
-import net.mamoe.mirai.event.subscribeAlways
 import net.mamoe.mirai.message.code.MiraiCode.deserializeMiraiCode
-import net.mamoe.mirai.message.data.At
-import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.at
 import net.mamoe.mirai.message.data.buildMessageChain
-import team.redrock.makiko.service.Service
-import team.redrock.makiko.utils.getPic
-import java.io.File
 
 /**
  * team.redrock.makiko.service.impl.JoinService

@@ -3,7 +3,7 @@ package interceptors
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.code.MiraiCode.deserializeMiraiCode
 import net.mamoe.mirai.message.data.*
-import utils.chain
+import team.redrock.makiko.utils.chain
 
 /**
  * team.redrock.makiko.interceptors.AtMessageContainsInterceptor
@@ -13,7 +13,7 @@ import utils.chain
  * @since 2022/8/9 13:28
  */
 abstract class AtMessageContainsInterceptor(vararg key: String, private val withPic: String? = null) :
-    interceptors.AtMessageEventInterceptor {
+    AtMessageEventInterceptor {
 
     private var key: Array<out String>
 
