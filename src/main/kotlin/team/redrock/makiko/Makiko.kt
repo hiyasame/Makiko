@@ -1,14 +1,10 @@
 package team.redrock.makiko
 
+import com.ndhzs.hotfix.HotfixKotlinPlugin
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
-import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
-import net.mamoe.mirai.event.GlobalEventChannel
-import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.utils.info
-import team.redrock.makiko.interceptors.InterceptorHandler
-import team.redrock.makiko.service.ServiceManager
 
-object Makiko : KotlinPlugin(
+object Makiko : HotfixKotlinPlugin(
     JvmPluginDescription(
         id = "team.redrock.makiko",
         name = "Makiko",
@@ -18,9 +14,7 @@ object Makiko : KotlinPlugin(
         info("""卷娘可爱捏""")
     }
 ) {
-    override fun onEnable() {
+    override fun onHotfixEnable() {
         logger.info { "Plugin loaded" }
-        InterceptorHandler.init(this)
-        ServiceManager.init(this)
     }
 }
