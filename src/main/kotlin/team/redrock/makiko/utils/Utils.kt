@@ -3,10 +3,7 @@ package team.redrock.makiko.utils
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.withLock
 import net.mamoe.mirai.Bot
-import net.mamoe.mirai.contact.Contact
-import net.mamoe.mirai.contact.Group
-import net.mamoe.mirai.contact.Member
-import net.mamoe.mirai.contact.MemberPermission
+import net.mamoe.mirai.contact.*
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.Message
@@ -56,6 +53,16 @@ suspend fun requestImage(url: String, contact: Contact): Image {
         })
     }
     return body.byteStream().uploadAsImage(contact)
+}
+
+suspend fun NormalMember.tryKick(msg: String, permission: MemberPermission = MemberPermission.ADMINISTRATOR) {
+    kotlin.runCatching {
+        if (permission > this.permission) {
+            kick(msg)
+        }
+    }.onFailure {
+        it.printStackTrace()
+    }
 }
 
 val theBot: Bot

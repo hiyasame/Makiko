@@ -43,7 +43,8 @@ object InterceptorHandler {
             StudyInterceptor,
             JoinInterceptor,
             AchievementInterceptor,
-            LiaoInterceptor
+            LiaoInterceptor,
+            InformationSecurityInterceptor
         )
         // init eggshell
         registerAtMessageInterceptor(

@@ -13,6 +13,7 @@ import team.redrock.makiko.service.Service
 import team.redrock.makiko.utils.doPermissionAction
 import team.redrock.makiko.utils.getPic
 import team.redrock.makiko.utils.theBot
+import team.redrock.makiko.utils.tryKick
 import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -36,38 +37,43 @@ object CleanMemberService : Service {
 
     override fun init(plugin: KotlinPlugin) {
         job = plugin.launch {
-            while (true) {
                 // 一分钟检查一次
-                delay(TimeUnit.MINUTES.toMillis(1))
-                handleRemind()
-                handleClean()
-            }
+//                delay(TimeUnit.MINUTES.toMillis(1))
+//                handleRemind()
+//                handleClean()
+            delay(10000)
+            handleClean()
         }
     }
 
     private suspend fun handleClean() {
-        if (!executedFlag && (checkTime(3, 0) || checkTime(7, 0))) {
+//        if (!executedFlag && (checkTime(3, 0) || checkTime(7, 0))) {
             theBot.groups.forEach { group ->
+                if (group.id != 904552771L) {
+                    return@forEach
+                }
                 group.members.forEach { member ->
-                    if (!regex.matches(member.nick)) {
-                        group.doPermissionAction {
-                            member.kick("昵称不合规范")
-                        }
+                    if (!regex.matches(member.nameCard)) {
+                        member.tryKick("昵称不合规范")
+                        delay(5000)
                     }
                 }
             }
-        }
+//        }
     }
 
     private suspend fun handleRemind() {
-        if (!executedFlag && (checkTime(2, 8) || checkTime(6, 8))) {
+//        if (!executedFlag && (checkTime(2, 8) || checkTime(6, 8))) {
             theBot.groups.forEach {
+                if (it.id != 904552771L) {
+                    return@forEach
+                }
                 it.sendMessage(getRemindMsg())
             }
-        }
+//        }
     }
 
-    private suspend fun getRemindMsg(): MessageChain {
+    private fun getRemindMsg(): MessageChain {
         return buildMessageChain {
             append(
                 "今天晚上12点卷娘可要清理掉不按规矩改名的同学了哦！"

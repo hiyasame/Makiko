@@ -11,7 +11,7 @@ import team.redrock.makiko.interceptors.AtMessageContainsInterceptor
  * @author 寒雨
  * @since 2022/8/9 13:48
  */
-object StudyInterceptor : AtMessageContainsInterceptor("学习", "收获") {
+object StudyInterceptor : AtMessageContainsInterceptor("学", "收获") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """
