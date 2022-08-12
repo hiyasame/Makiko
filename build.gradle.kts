@@ -12,6 +12,7 @@ version = "base-0.1-alpha1"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")
+    maven("https://jitpack.io")
     mavenCentral()
 }
 

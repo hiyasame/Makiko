@@ -10,12 +10,13 @@
 本文只介绍如何快速参与，以下步骤分为 [Jvm 平台](#Jvm 平台)和 [Js 平台](#Js 平台)
 
 ### Jvm 平台
-#### 前提
+#### 一、前提
 首先需要你有一定的 java 或 kotlin 基础，并了解过 [mirai](https://github.com/mamoe/mirai) 的写法
 > 若不是很了解的话，建议先看一下 mirai 的官方文档：https://github.com/mamoe/mirai  
 > 如果你只是想简单提个 pr，加个彩蛋，可以直接看官方的 api 文档：https://github.com/mamoe/mirai/blob/dev/docs/CoreAPI.md
 
-#### 添加依赖
+#### 二、添加依赖
+版本号：[![](https://jitpack.io/v/985892345/Makiko.svg)](https://jitpack.io/#985892345/Makiko)  
 使用 idea 新建一个 kotlin 项目，然后在你的项目中添加如下设置：
 ````kotlin
 repositories {
@@ -24,12 +25,12 @@ repositories {
 
 dependencies { 
   // mirai 基础包
-  implementation("com.github.985892345:Makiko:base-0.1-alpha1")
+  implementation("com.github.985892345:Makiko:base-0.1-alpha1") // 版本号请看上方 jitpack 标签
 }
 ````
 如果你已成功编译，那么就可以开始开发了
 
-#### 书写代码
+#### 三、书写代码
 因为使用了 mirai-hotfix，每个项目的需要遵守以下写法才能成功被加载：
 
 1、在 `java` 或者 `kotlin` 根目录下创建一个类，并实现 `JarEntrance` 接口
@@ -78,7 +79,7 @@ class Test : JarEntrance {
 > ````
 更多用法请参考 mirai 官网 [api 文档](https://github.com/mamoe/mirai/blob/dev/docs/CoreAPI.md)
 
-#### 打包发送
+#### 四、打包发送
 使用 gradle 自带的 jar 命令即可打包，然后在 build/libs 下，将打包好的 jar 包私发给我们即可
 
 **注意:** 如果你使用了其他第三方依赖，请将该第三方依赖的 jar 包一起发给我们
