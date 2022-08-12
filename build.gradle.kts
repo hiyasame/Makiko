@@ -1,34 +1,42 @@
 plugins {
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.serialization") version "1.6.10"
-    java
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    
-    // mirai 热修插件 https://github.com/985892345/mirai-hotfix
-    id("io.github.985892345.mirai-hotfix") version "1.1"
+    val kotlinVersion = "1.7.10"
+    kotlin("jvm") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
+    `maven-publish`
 }
 
 group = "team.redrock"
-version = "1.0-SNAPSHOT"
+version = "base-0.1-alpha1"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")
+    maven("https://jitpack.io")
     mavenCentral()
 }
 
 dependencies {
-    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
-    compileOnly("com.google.code.gson:gson:2.9.0")
-    compileOnly("net.mamoe:mirai-core:2.11.1")
-    compileOnly("net.mamoe:mirai-console:2.11.1")
-    compileOnly(kotlin("stdlib"))
-    testImplementation("net.mamoe:mirai-console-terminal:2.11.1")
+    val miraiVersion = "2.12.1"
+    api("net.mamoe:mirai-core:$miraiVersion") // mirai-core 的 API
+    api("net.mamoe:mirai-console:$miraiVersion") // 后端
+    
+    // mirai 热修插件 https://github.com/985892345/mirai-hotfix
+    api("com.github.985892345:mirai-hotfix:1.3")
 }
 
-hotfix {
-    createHotfix("Interceptors")
-    createHotfix("ServiceCleanMember")
-    createHotfix("ServiceDirtyWord")
-    createHotfix("ServiceJoin")
-    createHotfix("ServiceRepeatMessage")
+// 发布带有 mirai-hotfix 的依赖
+tasks.register("JarWithHotfix", Jar::class.java) {
+    group = "jar"
+    exclude("META-INF/**")
+    from(sourceSets.named("main").get().output)
+    from(sourceSets.named("main").get().compileClasspath.filter {
+        it.name.contains("mirai-hotfix")
+    }.map { file -> zipTree(file) })
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }
