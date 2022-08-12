@@ -84,7 +84,7 @@ class Test : JarEntrance {
 使用 gradle 自带的 jar 命令即可打包，然后在 build/libs 下，将打包好的 jar 包私发给我们即可
 
 **注意:** 如果你使用了其他第三方依赖，请将该第三方依赖的 jar 包一起发给我们
-> 不知道怎们获得第三方库的依赖？  
+> 不知道怎么获得第三方库的依赖？  
 > 1、点击 idea 右侧的 `External Libraries`  
 > 2、找到你依赖的第三方库  
 > 3、右键点击并选择 `Open Library Settings`，然后你可以在打开的窗口中看到该 jar 包的位置
