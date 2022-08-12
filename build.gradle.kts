@@ -2,8 +2,6 @@ plugins {
     val kotlinVersion = "1.7.10"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
-    id("net.mamoe.mirai-console") version "2.12.1"
-    // mirai 热修插件 https://github.com/985892345/mirai-hotfix
     `maven-publish`
 }
 
@@ -17,6 +15,11 @@ repositories {
 }
 
 dependencies {
+    val miraiVersion = "2.12.1"
+    api("net.mamoe:mirai-core:$miraiVersion") // mirai-core 的 API
+    api("net.mamoe:mirai-console:$miraiVersion") // 后端
+    
+    // mirai 热修插件 https://github.com/985892345/mirai-hotfix
     api("com.github.985892345:mirai-hotfix:1.3")
 }
 
