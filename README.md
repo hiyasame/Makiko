@@ -16,7 +16,7 @@
 > 如果你只是想简单提个 pr，加个彩蛋，可以直接看官方的 api 文档：https://github.com/mamoe/mirai/blob/dev/docs/CoreAPI.md
 
 ### 二、添加依赖
-版本号：[![](https://jitpack.io/v/985892345/Makiko.svg)](https://jitpack.io/#985892345/Makiko)  
+版本号：[![](https://jitpack.io/v/ColdRain-Moro/Makiko.svg)](https://jitpack.io/#ColdRain-Moro/Makiko)  
 使用 idea 新建一个 kotlin 项目，然后在你的项目中添加如下设置：
 ````kotlin
 repositories {
@@ -25,7 +25,7 @@ repositories {
 
 dependencies { 
   // mirai 基础包
-  implementation("com.github.985892345:Makiko:base-0.1-alpha1") // 版本号请看上方 jitpack 标签
+  implementation("com.github.ColdRain-Moro:Makiko:base-0.1-alpha1") // 版本号请看上方 jitpack 标签
 }
 ````
 如果你已成功编译，那么就可以开始开发了
