@@ -24,7 +24,7 @@ repositories {
 
 dependencies { 
   // mirai 基础包
-  implementation("com.github.985892345:Makiko:0.1")
+  implementation("com.github.985892345:Makiko:base-0.1-alpha1")
 }
 ````
 如果你已成功编译，那么就可以开始开发了
