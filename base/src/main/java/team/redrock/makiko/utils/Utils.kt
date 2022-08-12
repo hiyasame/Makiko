@@ -1,14 +1,8 @@
 package team.redrock.makiko.utils
 
-import com.ndhzs.hotfix.handler.suffix.jar.JarEntrance
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.sync.withLock
 import net.mamoe.mirai.Bot
-import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.contact.*
-import net.mamoe.mirai.event.GlobalEventChannel
-import net.mamoe.mirai.event.Listener
-import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.Message
 import net.mamoe.mirai.message.data.MessageChain
@@ -16,7 +10,6 @@ import net.mamoe.mirai.message.data.messageChainOf
 import net.mamoe.mirai.utils.ExternalResource.Companion.toExternalResource
 import net.mamoe.mirai.utils.ExternalResource.Companion.uploadAsImage
 import okhttp3.*
-import team.redrock.makiko.Makiko
 import java.io.IOException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
