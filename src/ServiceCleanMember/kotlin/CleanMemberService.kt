@@ -34,10 +34,11 @@ class CleanMemberService : JarEntrance {
     override suspend fun CommandSender.onFixLoad() {
         job = Makiko.launch {
             while (true) {
-                // 一分钟检查一次
-                delay(TimeUnit.MINUTES.toMillis(1))
+                // 一小时检查一次
+                delay(10000)
                 handleRemind()
                 handleClean()
+                delay(TimeUnit.HOURS.toMillis(1))
             }
         }
     }
@@ -49,12 +50,16 @@ class CleanMemberService : JarEntrance {
     }
 
     private suspend fun handleClean() {
-        if (!executedFlag && (checkTime(3, 0) || checkTime(7, 0))) {
+        if (checkTime(3, 0) || checkTime(7, 0)) {
             theBot.groups.forEach { group ->
+                if (group.id != 904552771L) {
+                    return@forEach
+                }
                 group.members.forEach { member ->
-                    if (!regex.matches(member.nick)) {
-                        group.doPermissionAction {
+                    if (!regex.matches(member.nameCard)) {
+                        if (group.botPermission > member.permission) {
                             member.kick("昵称不合规范")
+                            delay(5000)
                         }
                     }
                 }
@@ -63,7 +68,7 @@ class CleanMemberService : JarEntrance {
     }
 
     private suspend fun handleRemind() {
-        if (!executedFlag && (checkTime(2, 8) || checkTime(6, 8))) {
+        if (checkTime(2, 8) || checkTime(6, 8)) {
             theBot.groups.forEach {
                 it.sendMessage(getRemindMsg())
             }
