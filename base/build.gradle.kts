@@ -1,8 +1,8 @@
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
-    `maven-publish`
     id("net.mamoe.mirai-console") version "2.12.1"
+    `maven-publish`
 }
 
 group = "team.redrock"
