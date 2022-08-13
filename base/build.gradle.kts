@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "team.redrock"
-version = "base-0.1-alpha1"
+version = "base-0.1"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")
