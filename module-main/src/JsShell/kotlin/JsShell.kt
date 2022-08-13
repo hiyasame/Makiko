@@ -1,7 +1,5 @@
 import com.ndhzs.hotfix.handler.suffix.jar.JarEntrance
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.contact.MemberPermission
@@ -29,11 +27,11 @@ class JsShell : JarEntrance {
 
     private val codeRunner by lazy { CodeRunner(Makiko) }
 
-    override suspend fun CommandSender.onFixLoad() {
+    override fun CommandSender.onFixLoad() {
         codeRunner.init()
     }
 
-    override suspend fun CommandSender.onFixUnload(): Boolean {
+    override fun CommandSender.onFixUnload(): Boolean {
         codeRunner.unregister()
         return true
     }

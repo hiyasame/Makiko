@@ -22,6 +22,9 @@ hotfix {
     createHotfix("ServiceDirtyWord")
     createHotfix("ServiceJoin")
     createHotfix("ServiceRepeatMessage")
+    createHotfix("JsShell") {
+        compileOnly("org.mozilla:rhino:1.7.14")
+    }
 }
 
 

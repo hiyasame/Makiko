@@ -1,10 +1,12 @@
 package team.redrock.makiko
 
 import com.ndhzs.hotfix.HotfixKotlinPlugin
+import com.ndhzs.hotfix.handler.suffix.jar.JarHotfixSuffixHandler
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.utils.info
+import team.redrock.makiko.script.JsSuffixHandler
 
 object Makiko : HotfixKotlinPlugin(
     JvmPluginDescription(
@@ -14,7 +16,8 @@ object Makiko : HotfixKotlinPlugin(
     ) {
         author("Rain")
         info("""卷娘可爱捏""")
-    }
+    },
+    typeHandlers = arrayOf(JarHotfixSuffixHandler, JsSuffixHandler)
 ) {
     // 获取群聊
     val groupEnrollOrTest: Group

@@ -193,14 +193,99 @@ new Thread(new Runnable({
 new Thread(() => { print("hello world") }).start()
 ~~~
 
+### Typescript
+
+建议使用`babel`转译为es5标准，并且在`targets`中指定`rhino`来获得最好的语法兼容
+
+`babel.config.json`配置供参考
+
+~~~json
+{
+    "presets": [
+        [
+            "@babel/preset-env", 
+            {
+                "targets": {
+                    "rhino": "1.7.14"
+                },
+                "modules": false
+            }
+        ],
+        [
+            "@babel/preset-typescript"
+        ]
+    ]
+}
+~~~
+
 ### 兼容层
 
 如果你要使用，使用`useCompatibilityLayer()`获取兼容层，通过解构赋值拿到你需要使用的函数
 
-兼容层提供`d.ts`类型定义，为ts/js提供补全能力
+兼容层提供`d.ts`类型定义，为ts玩家提供补全能力
 
-~~~js
-const { subscribeEvent, GroupMessageEvent } = useCompatibilityLayer()
+我会在release包中提供d.ts文件的压缩包
+
+~~~ts
+// @ts-ignore
+const { subscribeEvent, GroupMessageEventType } = useCompatibilityLayer() as CompatibilityLayer
 ~~~
 
+使用Typescript时，调用某些兼容层没有定义的方法可以使用`@ts-ignore`
 
+> 说实话还不是很明白d.ts要如何才能给js提供补全能力（不导入模块的情况下），连ts也是靠强转类型+`@ts-ignore`才得到补全能力
+> 
+> 希望知道可以怎么写的同学可以教我，或者给我提pr:)
+
+### 注意事项
+
+#### 不要使用多模块开发项目
+
+由于技术原因，暂时不支持加载多模块js，所有逻辑请放在一个文件当中。
+
+babel编译出来的文件可能会含有如下代码
+
+~~~js
+Object.defineProperty(exports, "__esModule", { value: true });
+
+export {  }
+~~~
+
+删掉他们，否则插件无法加载
+
+#### 测试环境
+
+> 使用mirai-console加载release中的jar包插件，第一次运行会在根目录生成hotfix/makiko文件夹，将你的js文件放入这个文件夹，将lib.js放入hotfix文件夹。
+>
+> 在控制台使用指令`fixmakiko reload`加载js文件
+> 
+> 随便找个qq群测试功能
+> 
+> 嫌麻烦就算了，直接想当然写，我会帮你们测试并修改一些写错的地方。
+
+### 简单示例
+
+~~~ts
+import { CompatibilityLayer } from "types";
+import { GroupMessageEvent, Listener } from "./types/types";
+
+// @ts-ignore
+const { subscribeEvent, GroupMessageEventType } = useCompatibilityLayer() as CompatibilityLayer;
+
+let listener: Listener;
+
+function onLoad() {
+    listener = subscribeEvent<GroupMessageEvent>(GroupMessageEventType, event => {
+        if (event.getMessage().contentEquals("阿巴阿巴", false)) {
+            // @ts-ignore
+            event.getGroup().sendMessage("歪比巴卜")
+        }
+    })
+}
+
+function onUnload() {
+    listener.complete()
+}
+~~~
+
+效果是我在群里发个阿巴阿巴，机器人就会回我一个歪比巴卜
