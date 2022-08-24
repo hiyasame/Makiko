@@ -4,15 +4,6 @@ plugins {
     id("org.jetbrains.dokka") version "1.7.10"
 }
 
-group = "team.redrock"
-version = "module-main"
-
-repositories {
-    maven("https://maven.aliyun.com/repository/public")
-    maven("https://jitpack.io")
-    mavenCentral()
-}
-
 dependencies {
     implementation(project(":base"))
 }
