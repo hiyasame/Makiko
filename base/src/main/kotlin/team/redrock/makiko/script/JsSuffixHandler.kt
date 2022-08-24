@@ -29,11 +29,7 @@ object JsSuffixHandler : IHotfixSuffixHandler {
             optimizationLevel = -1
             languageVersion = Context.VERSION_ES6
             scope = initStandardObjects()
-            evaluateReader(scope, MiraiConsole.rootDir.resolve("hotfix").resolve("lib.js").reader(), null, 1, null)
             evaluateReader(scope, file.reader(), null, 1, null)
-            GlobalEventChannel.subscribeAlways<GroupMessageEvent> {
-
-            }
 
             (scope.get("onLoad", scope) as Function).call(this, scope, scope, arrayOf())
         }

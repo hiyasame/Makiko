@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm")
     id("io.github.985892345.mirai-hotfix") version "1.3"
+    id("org.jetbrains.dokka") version "1.7.10"
 }
 
 group = "team.redrock"

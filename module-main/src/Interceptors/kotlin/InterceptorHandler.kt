@@ -5,6 +5,7 @@ import interceptors.common.*
 import interceptors.eggshell.AgeInterceptor
 import interceptors.eggshell.HeightInterceptor
 import interceptors.eggshell.WeightInterceptor
+import interceptors.eggshell.extra.LiaoInterceptor
 import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.event.GlobalEventChannel
 import net.mamoe.mirai.event.Listener
@@ -45,7 +46,9 @@ class InterceptorHandler : JarEntrance {
             JoinInterceptor(),
             AchievementInterceptor(),
             LiaoInterceptor(),
-            InformationSecurityInterceptor()
+            InformationSecurityInterceptor(),
+            AndroidInterceptor(),
+            IOSInterceptor()
         )
         // init eggshell
         registerAtMessageInterceptor(

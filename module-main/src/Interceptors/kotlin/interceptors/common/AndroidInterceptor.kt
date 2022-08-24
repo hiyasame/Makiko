@@ -5,17 +5,17 @@ import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.buildMessageChain
 
 /**
- * team.redrock.makiko.interceptors.common.FrontEndInterceptor
+ * interceptors.common.AndroidIntercepter
  * makiko
  *
  * @author 寒雨
- * @since 2022/8/9 13:41
+ * @since 2022/8/14 13:16
  */
-class FrontEndInterceptor : AtMessageContainsInterceptor("前端") {
+class AndroidInterceptor : AtMessageContainsInterceptor("android", "安卓") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """
-            前端顾名思义就是前端工程师，“打造最完美的前端界面”全靠他们！点这里了解更多：https://redrock.team/s/qa/frontend
+            Android是移动开发部从事安卓系统APP研发的同学，新兴的鸿蒙系统也支持安卓应用。Android开发仅需要普通的电脑即可。
             """.trimIndent()
         )
     }

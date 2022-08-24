@@ -16,7 +16,7 @@ class JoinInterceptor : AtMessageContainsInterceptor("加入", "进", "报名") 
         append(
             """
             就在开学后，红岩网校就会开启一年一度的招新工作，去红岩报道迎新点线下宣讲会可以了解更多哟！快让redrocker成为你最骄傲的自称，来红岩和卷卷一起进步吧~~
-            点这里了解更多：https://sourl.cn/3LnuB5
+            点这里了解更多：https://redrock.team/s/qa/redrock
         """.trimIndent()
         )
     }

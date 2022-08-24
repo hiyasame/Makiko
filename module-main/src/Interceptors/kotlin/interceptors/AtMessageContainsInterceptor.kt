@@ -28,7 +28,7 @@ abstract class AtMessageContainsInterceptor(vararg key: String, private val with
             .filterNot { it is At }
             .chain()
             .contentToString()
-            .run { key.any { contains(it) } } && atBot
+            .run { key.any { lowercase().contains(it) } } && atBot
         if (intercept) {
             var msg = At(event.sender.id) + reply
             if (withPic != null) {

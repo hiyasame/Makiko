@@ -30,6 +30,9 @@ publishing {
         create<MavenPublication>("maven") {
             from(components["java"])
         }
+        repositories {
+            maven { url = uri("$buildDir/local") }
+        }
     }
 }
 

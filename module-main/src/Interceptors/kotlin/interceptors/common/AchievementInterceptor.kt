@@ -15,7 +15,10 @@ class AchievementInterceptor : AtMessageContainsInterceptor("成果") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """
-            嘿嘿，红岩网校的成果有这些：重邮帮小程序，”重邮小帮手“公众号，“掌上重邮”APP……
+            嘿嘿，红岩网校的成果有这些：
+            重邮帮小程序 https://redrock.team/s/cyb ，
+            ”重邮小帮手“公众号 https://redrock.team/s/cyxbs ，
+            “掌上重邮”APP……
             """.trimIndent()
         )
     }

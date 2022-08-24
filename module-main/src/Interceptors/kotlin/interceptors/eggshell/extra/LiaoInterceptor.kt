@@ -1,11 +1,11 @@
-package interceptors.common
+package interceptors.eggshell.extra
 
 import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.buildMessageChain
 import interceptors.AtMessageContainsInterceptor
 
 /**
- * team.redrock.makiko.interceptors.common.LiaoInterceptor
+ * team.redrock.makiko.interceptors.eggshell.extra.LiaoInterceptor
  * makiko
  *
  * @author 寒雨

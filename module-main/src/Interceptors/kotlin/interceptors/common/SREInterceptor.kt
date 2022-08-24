@@ -11,11 +11,11 @@ import interceptors.AtMessageContainsInterceptor
  * @author 寒雨
  * @since 2022/8/9 13:47
  */
-class SREInterceptor : AtMessageContainsInterceptor("运维") {
+class SREInterceptor : AtMessageContainsInterceptor("运维", "sre") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """
-            运维安全部的成员技术高超，多亏了他们的存在，网校的系统才维持着安全稳定！点这里了解更多：https://sourl.cn/yDpSJf
+            运维安全部的成员技术高超，多亏了他们的存在，网校的系统才维持着安全稳定！点这里了解更多：https://redrock.team/s/qa/sre
         """.trimIndent()
         )
     }

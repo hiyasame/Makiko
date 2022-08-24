@@ -5,17 +5,17 @@ import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.buildMessageChain
 
 /**
- * team.redrock.makiko.interceptors.common.FrontEndInterceptor
+ * interceptors.common.IOSInterceptor
  * makiko
  *
  * @author 寒雨
- * @since 2022/8/9 13:41
+ * @since 2022/8/14 13:18
  */
-class FrontEndInterceptor : AtMessageContainsInterceptor("前端") {
+class IOSInterceptor : AtMessageContainsInterceptor("ios") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """
-            前端顾名思义就是前端工程师，“打造最完美的前端界面”全靠他们！点这里了解更多：https://redrock.team/s/qa/frontend
+                iOS部门是移动开发部从事苹果系统APP研发的部门，我们拥有强大的苹果生态与无限的可能。想从App Store上看到自己的应用吗？想成为下一个Apple Developer吗？来iOS吧！
             """.trimIndent()
         )
     }
