@@ -241,9 +241,11 @@ globalThis.onUnload = () => {
 
 ### 注意事项
 
-#### 关闭Webpack的函数名称混淆
+#### 关闭Webpack的函数名称混淆 & 清理无用函数
 
 不关的话生命周期入口函数的名称将被混淆，java层无法获取
+
+或者打包的时候就没有打进去
 
 #### 不支持CommonJs/ESModule等模块化规范
 
@@ -271,7 +273,7 @@ export {  }
 
 模板项目中的ts代码
 
-由于webpack打包是整个打在一个闭包里，直接声明函数的话java层无法访问，故将函数挂载到`globalThis`
+由于webpack打包是整个打在一个闭包里，直接声明函数的话java层无法访问，故将函数挂载到`this` (似乎不支持globalThis)
 
 ~~~ts
 import { GroupMessageEvent, Listener, subscribeEvent } from "makiko-api"
@@ -282,7 +284,7 @@ let listener: Listener
  * 插件加载
  */
 // @ts-ignore
-globalThis.onLoad = () => {
+this.onLoad = () => {
     console.log("Hello World");
     listener = subscribeEvent<GroupMessageEvent>(GroupMessageEvent, (e) => {
         if (e.getMessage().contentToString() == "3G") {
@@ -295,7 +297,7 @@ globalThis.onLoad = () => {
  * 插件卸载
  */
 // @ts-ignore
-globalThis.onUnload = () => {
+this.onUnload = () => {
     console.log("Goodbye World");
     listener.complete()
 }
