@@ -193,57 +193,61 @@ new Thread(new Runnable({
 new Thread(() => { print("hello world") }).start()
 ~~~
 
-### Typescript
+#### 多模块 & Typescript
 
-建议使用`babel`转译为es5标准，并且在`targets`中指定`rhino`来获得最好的语法兼容
+可以使用`webpack`将多个模块打包在一起，建议配合`babel`，`core-js`来取得更好的语法兼容
 
-`babel.config.json`配置供参考
+详情可以参考模板项目: [makiko-ts-plugin-template](https://github.com/ColdRain-Moro/makiko-ts-plugin-template/)
 
-~~~json
-{
-    "presets": [
-        [
-            "@babel/preset-env", 
-            {
-                "targets": {
-                    "rhino": "1.7.14"
-                },
-                "modules": false
-            }
-        ],
-        [
-            "@babel/preset-typescript"
-        ]
-    ]
+#### 兼容层
+
+> 可参考 [makiko-ts-plugin-template](https://github.com/ColdRain-Moro/makiko-ts-plugin-template/)
+
+直接使用`yarn add makiko-api`即可引入项目，注意打包的时候要一起打进去
+
+目前只简单的封装了一个订阅事件的函数，还有两种事件类型
+
+有什么希望我兼容的可以跟我提
+
+~~~ts
+import { GroupMessageEvent, Listener, subscribeEvent } from "makiko-api"
+
+let listener: Listener
+
+/**
+ * 插件加载
+ */
+// @ts-ignore
+globalThis.onLoad = () => {
+    console.log("Hello World");
+    // 订阅事件
+    listener = subscribeEvent<GroupMessageEvent>(GroupMessageEvent, (e) => {
+        if (e.getMessage().contentToString() == "3G") {
+            e.getGroup().sendMessage("重现3g荣光, 我辈义不容辞！")
+        }
+    })
+}
+
+/**
+ * 插件卸载
+ */
+// @ts-ignore
+globalThis.onUnload = () => {
+    console.log("Goodbye World");
+    // 取消订阅
+    listener.complete()
 }
 ~~~
 
-### 兼容层
-
-如果你要使用，使用`useCompatibilityLayer()`获取兼容层，通过解构赋值拿到你需要使用的函数
-
-兼容层提供`d.ts`类型定义，为ts玩家提供补全能力
-
-我会在release包中提供d.ts文件的压缩包
-
-~~~ts
-// @ts-ignore
-const { subscribeEvent, GroupMessageEventType } = useCompatibilityLayer() as CompatibilityLayer
-~~~
-
-使用Typescript时，调用某些兼容层没有定义的方法可以使用`@ts-ignore`
-
-> 说实话还不是很明白d.ts要如何才能给js提供补全能力（不导入模块的情况下），连ts也是靠强转类型+`@ts-ignore`才得到补全能力
-> 
-> 希望知道可以怎么写的同学可以教我，或者给我提pr:)
-
 ### 注意事项
 
-#### 不要使用多模块开发项目
+#### 关闭Webpack的函数名称混淆
 
-由于技术原因，暂时不支持加载多模块js，所有逻辑请放在一个文件当中。
+不关的话生命周期入口函数的名称将被混淆，java层无法获取
 
-babel编译出来的文件可能会含有如下代码
+#### 不支持CommonJs/ESModule等模块化规范
+
+如你所见，最终的js文件中不允许以任何方式导入/导出模块
 
 ~~~js
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -251,11 +255,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 export {  }
 ~~~
 
-删掉他们，否则插件无法加载
+但你可以使用webpack等打包工具进行模块的合并
 
 #### 测试环境
 
-> 使用mirai-console加载release中的jar包插件，第一次运行会在根目录生成hotfix/makiko文件夹，将你的js文件放入这个文件夹，将lib.js放入hotfix文件夹。
+> 使用mirai-console加载release中的jar包插件，第一次运行会在根目录生成hotfix/makiko文件夹，将你的js文件放入这个文件夹
 >
 > 在控制台使用指令`fixmakiko reload`加载js文件
 > 
@@ -265,25 +269,34 @@ export {  }
 
 ### 简单示例
 
+模板项目中的ts代码
+
+由于webpack打包是整个打在一个闭包里，直接声明函数的话java层无法访问，故将函数挂载到`globalThis`
+
 ~~~ts
-import { CompatibilityLayer } from "types";
-import { GroupMessageEvent, Listener } from "./types/types";
+import { GroupMessageEvent, Listener, subscribeEvent } from "makiko-api"
 
+let listener: Listener
+
+/**
+ * 插件加载
+ */
 // @ts-ignore
-const { subscribeEvent, GroupMessageEventType } = useCompatibilityLayer() as CompatibilityLayer;
-
-let listener: Listener;
-
-function onLoad() {
-    listener = subscribeEvent<GroupMessageEvent>(GroupMessageEventType, event => {
-        if (event.getMessage().contentEquals("阿巴阿巴", false)) {
-            // @ts-ignore
-            event.getGroup().sendMessage("歪比巴卜")
+globalThis.onLoad = () => {
+    console.log("Hello World");
+    listener = subscribeEvent<GroupMessageEvent>(GroupMessageEvent, (e) => {
+        if (e.getMessage().contentToString() == "3G") {
+            e.getGroup().sendMessage("重现3g荣光, 我辈义不容辞！")
         }
     })
 }
 
-function onUnload() {
+/**
+ * 插件卸载
+ */
+// @ts-ignore
+globalThis.onUnload = () => {
+    console.log("Goodbye World");
     listener.complete()
 }
 ~~~

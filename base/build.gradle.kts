@@ -1,17 +1,7 @@
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
-    `maven-publish`
     id("net.mamoe.mirai-console") version "2.12.1"
-}
-
-group = "team.redrock"
-version = "base-0.1"
-
-repositories {
-    maven("https://maven.aliyun.com/repository/public")
-    maven("https://jitpack.io")
-    mavenCentral()
 }
 
 dependencies {
@@ -28,6 +18,9 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
             from(components["java"])
         }
         repositories {
