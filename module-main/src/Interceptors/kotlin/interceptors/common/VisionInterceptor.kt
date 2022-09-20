@@ -15,7 +15,7 @@ class VisionInterceptor : AtMessageContainsInterceptor("视觉") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """
-            视觉设计部是创意设计者，用色彩渲染世界。点这里了解更多：https://redrock.team/s/qa/design
+            视觉设计部的同学是创意设计者，用色彩渲染世界。点这里了解更多：https://redrock.team/s/qa/design
             """.trimIndent()
         )
     }

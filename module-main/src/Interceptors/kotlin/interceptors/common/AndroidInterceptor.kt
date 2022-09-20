@@ -15,7 +15,7 @@ class AndroidInterceptor : AtMessageContainsInterceptor("android", "安卓") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """
-            Android是移动开发部从事安卓系统APP研发的同学，新兴的鸿蒙系统也支持安卓应用。Android开发仅需要普通的电脑即可。
+            Android是移动开发部从事安卓系统APP研发的子部门。他们利用Java和Kotlin来创造无限的可能，想在手机拥有一个自己创造的APP吗？加入Android吧！
             """.trimIndent()
         )
     }

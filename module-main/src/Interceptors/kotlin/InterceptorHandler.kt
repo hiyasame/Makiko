@@ -43,6 +43,7 @@ class InterceptorHandler : JarEntrance {
             MobileInterceptor(),
             SREInterceptor(),
             StudyInterceptor(),
+            HowToJoinInterceptor(),
             JoinInterceptor(),
             AchievementInterceptor(),
             LiaoInterceptor(),

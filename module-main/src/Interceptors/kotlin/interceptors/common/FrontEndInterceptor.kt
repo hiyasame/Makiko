@@ -15,7 +15,7 @@ class FrontEndInterceptor : AtMessageContainsInterceptor("前端") {
     override val reply: MessageChain = buildMessageChain {
         append(
             """
-            前端顾名思义就是前端工程师，“打造最完美的前端界面”全靠他们！点这里了解更多：https://redrock.team/s/qa/frontend
+            他们是网站前台的画家。小程序、网站、webApp里都有他们的影子。打造完美的网页是前端的宗旨！ 点这里了解更多：https://redrock.team/s/qa/frontend
             """.trimIndent()
         )
     }
